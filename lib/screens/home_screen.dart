@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(
         leading: IconButton(
-            icon:Icon(Icons.person, color: kMainPrimaryColor,size: 29,),
+            icon:const Icon(Icons.person, color: kMainPrimaryColor,size: 29,),
             onPressed: () {
               Navigator.pushNamed(context, "/profile");
             }

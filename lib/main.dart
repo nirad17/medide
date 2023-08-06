@@ -5,7 +5,6 @@ import './screens/profile_screen.dart';
 import './screens/appointment_screen.dart';
 import './screens/payment_hist.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -22,10 +21,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         primaryColor: kMainPrimaryColor,
+        scaffoldBackgroundColor: Color(0xFFF6F6FA),
+        
       ),
       initialRoute: '/',
       routes: {
-
         '/': (context) => HomeScreen(),
         '/profile': (context) => ProfileScreen(),
         '/appointment': (context) => AppointmentScreen(),
