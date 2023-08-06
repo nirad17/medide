@@ -4,16 +4,15 @@ import 'package:medide/constants.dart';
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
 
-  const MyAppBar({super.key, this.leading});
+  const MyAppBar({Key? key, this.leading}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Color(0xFFF6F6FA),
-      title: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child:
-            Image.asset("assets/images/logo_medide.png", fit: BoxFit.fitHeight),
+      title: Image.asset(
+        "assets/images/logo_medide.png",
+        fit: BoxFit.contain,
       ),
       leading: leading ??
           IconButton(
@@ -29,7 +28,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           icon: const Icon(
-            Icons.chat,
+            Icons.chat_bubble,
             color: kMainPrimaryColor,
             size: 29,
           ),
