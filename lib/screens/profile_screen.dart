@@ -16,11 +16,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  Uint8List? _img;
-
-  // void selectImage() async {
+  
   File? _pickedImage;
-
+  String path = "";
   Future<void> _pickImage() async {
     final picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
@@ -28,6 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (pickedImage != null) {
       setState(() {
         _pickedImage = File(pickedImage.path);
+        path = pickedImage.path;
       });
     }
   }
@@ -49,49 +48,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         vertical: 20, horizontal: 15),
                     child: Row(
                       children: [
-                        Stack(
-                          children: [
-                            _img != null
-                                ? CircleAvatar(
-                                    radius: 72,
-                                    backgroundImage: MemoryImage(_img!))
-                                : const CircleAvatar(
-                                    radius: 36,
-                                    backgroundImage: NetworkImage(
-                                        "https://media.idownloadblog.com/wp-content/uploads/2017/03/Twitter-new-2017-avatar-001.png"),
-                                  ),
-                            Positioned(
-                                bottom: -5,
-                                left: 41,
-                                child: IconButton(
-                                  onPressed: () {
-                                    Image.file(
-                                      _pickedImage!,
-                                    );
-                                  },
-                                  icon: const Icon(
-                                    Icons.add_circle,
-                                    color: kMainPrimaryColor,
-                                    size: 20,
-                                  ),
-                                ))
-                          ],
+                        Flexible(
+                          flex: 2,
+                          child: Stack(
+                            children: [
+                              _pickedImage != null
+                                  ? CircleAvatar(
+                                      radius: 36,
+                                      backgroundImage: AssetImage(path))
+                                  : const CircleAvatar(
+                                      radius: 36,
+                                      backgroundImage: NetworkImage(
+                                          "https://media.idownloadblog.com/wp-content/uploads/2017/03/Twitter-new-2017-avatar-001.png"),
+                                    ),
+                              Positioned(
+                                  bottom: -5,
+                                  left: 41,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      _pickImage();
+                                      Image.file(
+                                        _pickedImage!,
+                                        height: 40,
+                                      );
+                                    },
+                                    icon: const Icon(
+                                      Icons.add_circle,
+                                      color: kMainPrimaryColor,
+                                      size: 20,
+                                    ),
+                                  ))
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           width: 50,
                         ),
-                        const Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Hi, ${'Nirad'}\n${'user1@gmail.com'}\n${'9876543210'}",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black54,
+                        const Flexible(
+                          flex: 5,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Hi, ${'Nirad'}\n${'user1@gmail.com'}\n${'9876543210'}",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         )
                       ],
                     ),
@@ -147,7 +154,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 15,
                 ),
                 ListTile(
-                  
                   title: const Text(
                     "Payment History",
                     style: TextStyle(
